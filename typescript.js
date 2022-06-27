@@ -1,42 +1,38 @@
-//// #2.0 How Typescript Works 
-// 타입스크립트가 뭔가요?
-// 프로그래밍 언어
-// strongly typed(강타입) 프로그래밍 언어
-// 컴파일러를 떠올릴 수 있다
-// 코드를 다 작성하면 기계가 실행할 수 있는 다른 종류의 코드로 변환되는 것
-// 타입스크립트 >>> 자바스크립트로 변환된다
-// 브라우저는 자바스크립트를 이해하기 때문
-// node는 둘 다 이해함
+//// #2.1 Implicit Types vs Explicit Types 
+// 타입 시스템에 대해 알아보자
+// 자바스크립트에서는 변수를 생성하기만 하고 타입을 지정하지 않았다
+// Java, C# 은 타입을 명시해야한다
 
-// 어떻게 우릴 보호해준다는 거야
-// 타입스크립트가 제공하는 보호장치는 자바스크립트로 변환되기 전에 발생된다
-// 타입스크립트가 먼저 코드를 확인하고 실수가 나지 않게 확인한다
-// 코드 에러가 있으면 변환(컴파일) 되지 않는다는 뜻 
+// 데이터와 변수의 타입을 명시적으로 정의할 수도 있고
+// 자바스크립트처럼 변수만 생성하고 넘어가도 된다
+// 타입을 추론해준다
 
-const hye = { name: "hye" }
-hye.hello()
-// 시뻘건 밑줄로 에러감지
-// Property 'hello' does not exist on type '{ name: string; }'
+let a = "hello"
+// a의 타입을 추론 >>> 문자열
 
-[1, 2, 3, 4] + false
-// Operator '+' cannot be applied to types 'number[]' and 'boolean'.
-// 자바스크립트에서는 냅다 실행했지만 타입스크립트에서는 컴파일조차 안된다
+a = "bye"
+// string > string
 
-function divide(a, b) {
-    return a / b
-}
-// // Parameter 'a' implicitly has an 'any' type.
+// a = 1
+// 안된다 
 
-divide(2, 3)
-divide("메롱")
-// Expected 2 arguments, but got 1.
-// 인자 2개가 필요해요 근데 1개에요
 
-// 입력값의 데이터 타입, 입력값의 갯수
+// 타입을 자세하게 알려주기
+// let b : boolean = "x"
+// Type 'string' is not assignable to type 'boolean'.
 
-const player = {
-    age: 12
-}
+// let b: boolean = false
+let b = false
+// : boolean <<< 타입스크립트 문법
 
-player.age = false
-// Type 'boolean' is not assignable to type 'number'.
+// let c = [1,2,3]
+// // number[]
+
+// c.push("1")
+// Argument of type 'string' is not assignable to parameter of type 'number'.
+
+// 만약 빈 배열을 선언했다면 명시적 표현을 사용하자
+let c = []
+// let c: number[] = []
+// 이럴 땐 명시적 표현이 유용하지만 명시적 표현은 최소화하는게 좋다
+// 타입스크립트가 추론하게 시키도록 하자
